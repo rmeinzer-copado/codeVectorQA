@@ -4,3 +4,6 @@
 [submodule "test_repo"]
 	path = test_repo
 	url = https://github.com/langchain-ai/langchain
+[submodule "falkordb-py_repo"]
+	path = falkordb-py_repo
+	url = https://github.com/falkordb/falkordb-py

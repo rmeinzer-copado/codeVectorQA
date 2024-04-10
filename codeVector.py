@@ -19,8 +19,9 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 dotenv.load_dotenv()
 
 # Clone
-repo_path = "broseph_repo"
-# repo = Repo.clone_from("https://github.com/rmeinzer-copado/broseph", to_path=repo_path)
+repo_path = "falkordb-py_repo"
+# commented-out after initial clone
+# repo = Repo.clone_from("https://github.com/falkordb/falkordb-py", to_path=repo_path)
 
 # Load
 loader = GenericLoader.from_filesystem(
@@ -32,24 +33,23 @@ loader = GenericLoader.from_filesystem(
 )
 documents = loader.load()
 # print(len(documents))
-# > 2
+# > 69
 
 python_splitter = RecursiveCharacterTextSplitter.from_language(
     language=Language.PYTHON, chunk_size=2000, chunk_overlap=200
 )
 texts = python_splitter.split_documents(documents)
 # print(len(texts))
-# > 4
+# > 163
 
 db = Chroma.from_documents(texts, OpenAIEmbeddings(disallowed_special=()))
 retriever = db.as_retriever(
-    # below is optional
-    # search_type="mmr",  # Also test "similarity"
-    # setting to 4 as that's the length of texts for broseph_repo index
-    search_kwargs={"k": 4},
+    # below is optional preference
+    search_type="mmr",  # Also test "similarity"
+    search_kwargs={"k": 8},
 )
 
-llm = ChatOpenAI(model="gpt-4")
+llm = ChatOpenAI(model="gpt-3.5-turbo")
 
 # First we need a prompt that we can pass into an LLM to generate this search query
 prompt = ChatPromptTemplate.from_messages(
@@ -79,7 +79,7 @@ document_chain = create_stuff_documents_chain(llm, prompt)
 
 qa = create_retrieval_chain(retriever_chain, document_chain)
 
-question = 'hat does broseph.py do?'
+question = 'Show me the code for the parse_double function.'
 result = qa.invoke({"input": question})
 print(result["answer"])
-# > "Greeter" is a class defined in the code. It has an initializer method (__init__) that takes in a parameter "name" and sets it as an instance variable. There is also a method within the class called "greet" which returns a greeting message that includes the instance variable "name". An object of the class "Greeter" can be created with a specific "name" and then use the "greet" method to generate a greeting.
+# # > 
