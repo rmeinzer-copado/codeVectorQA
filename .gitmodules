@@ -1,0 +1,6 @@
+[submodule "broseph_repo"]
+	path = broseph_repo
+	url = https://github.com/rmeinzer-copado/broseph
+[submodule "test_repo"]
+	path = test_repo
+	url = https://github.com/langchain-ai/langchain
