@@ -83,18 +83,3 @@ question = "Tell me about the 'greet' method."
 result = qa.invoke({"input": question})
 print(result["answer"])
 # > "Greeter" is a class defined in the code. It has an initializer method (__init__) that takes in a parameter "name" and sets it as an instance variable. There is also a method within the class called "greet" which returns a greeting message that includes the instance variable "name". An object of the class "Greeter" can be created with a specific "name" and then use the "greet" method to generate a greeting.
-
-# questions = [
-#     "What classes are derived from the Runnable class?",
-#     "What one improvement do you propose in code in relation to the class hierarchy for the Runnable class?",
-# ]
-
-# for question in questions:
-#     result = qa.invoke({"input": question})
-#     print(f"-> **Question**: {question} \n")
-#     print(f"**Answer**: {result['answer']} \n")
-# # > **Question**: What classes are derived from the Runnable class? 
-# # > **Answer**: The classes derived from the Runnable class are RunnableLambda, RunnableLearnable, RunnableBinding, RunnableSerializable, and RunnableWithFallbacks. 
-# # > **Question**: What one improvement do you propose in code in relation to the class hierarchy for the Runnable class? 
-# # > **Answer**: One proposed improvement in the given code is the introduction of a more organized and clear class hierarchy for the Runnable class. Currently, it seems that the Runnable class has a number of subclasses with varying functionality (e.g., RunnableLambda, RunnableConfigurableFields, RunnableSerializable, etc.). However, it's not clear how these classes are related or how they extend the functionality of the base Runnable class. 
-# # > An improved hierarchy might introduce intermediate abstract classes that group related functionality. For example, all Runnable classes that are serializable could inherit from an abstract 'SerializableRunnable' class. This class would implement the methods related to serialization, allowing concrete subclasses to focus on their specific functionality. This design would make it easier to understand the relationships between different Runnable classes and could potentially reduce code duplication. 
