@@ -79,7 +79,7 @@ document_chain = create_stuff_documents_chain(llm, prompt)
 
 qa = create_retrieval_chain(retriever_chain, document_chain)
 
-question = 'Show me the code for the parse_double function.'
+question = 'What does the QueryResult class contain'
 result = qa.invoke({"input": question})
 print(result["answer"])
-# # > 
+# > The QueryResult class contains methods such as initialization (__init__), parsing response data, checking for errors, parsing results, getting statistics, parsing headers, parsing records, and tracking various metrics like labels added/removed, nodes created/deleted, properties set/removed, relationships created/deleted, indices created/deleted, cached execution, and run time in milliseconds.
