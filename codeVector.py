@@ -49,6 +49,7 @@ retriever = db.as_retriever(
     search_kwargs={"k": 8},
 )
 
+# Note - using gpt-4 seems to be less reliable in ascertaining full context
 llm = ChatOpenAI(model="gpt-3.5-turbo")
 
 # First we need a prompt that we can pass into an LLM to generate this search query
@@ -79,7 +80,7 @@ document_chain = create_stuff_documents_chain(llm, prompt)
 
 qa = create_retrieval_chain(retriever_chain, document_chain)
 
-question = 'What does the QueryResult class contain'
+question = 'Is the test_explain.py module in your context?'
 result = qa.invoke({"input": question})
 print(result["answer"])
 # > The QueryResult class contains methods such as initialization (__init__), parsing response data, checking for errors, parsing results, getting statistics, parsing headers, parsing records, and tracking various metrics like labels added/removed, nodes created/deleted, properties set/removed, relationships created/deleted, indices created/deleted, cached execution, and run time in milliseconds.
